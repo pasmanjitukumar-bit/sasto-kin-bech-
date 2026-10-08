@@ -1,0 +1,1 @@
+{"name":"sastokinbech","private":true,"version":"0.1.0","scripts":{"build":"esbuild src/marketplace.js --bundle --minify --outfile=public/marketplace.js","start":"node preview-server.cjs"},"dependencies":{"@supabase/supabase-js":"^2.0.0"},"devDependencies":{"esbuild":"^0.25.0"}}

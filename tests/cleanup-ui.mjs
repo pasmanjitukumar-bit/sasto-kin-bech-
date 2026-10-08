@@ -1,0 +1,8 @@
+import {createClient} from '@supabase/supabase-js';import fs from 'node:fs/promises';
+const accounts=JSON.parse(await fs.readFile('test-credentials.local.json','utf8')),service=createClient(process.env.SUPABASE_URL,process.env.SUPABASE_SERVICE_ROLE_KEY,{auth:{persistSession:false}}),ids=Object.values(accounts).map(a=>a.id);
+async function ok(p){const r=await p;if(r.error)throw Error(r.error.message);return r.data;}
+const products=await ok(service.from('products').select('id').in('seller_id',ids)),orders=await ok(service.from('orders').select('id').in('buyer_id',ids));
+for(const id of ids){await ok(service.from('admins').delete().eq('user_id',id));await ok(service.from('messages').delete().eq('buyer_id',id));await ok(service.from('messages').delete().eq('seller_id',id));await ok(service.from('reviews').delete().eq('buyer_id',id));await ok(service.from('favourites').delete().eq('user_id',id));await ok(service.from('account_requests').delete().eq('user_id',id));await ok(service.from('reports').delete().eq('user_id',id));}
+for(const o of orders){await ok(service.from('order_items').delete().eq('order_id',o.id));await ok(service.from('orders').delete().eq('id',o.id));}
+for(const p of products){const photos=await ok(service.from('product_photos').select('storage_path').eq('product_id',p.id));if(photos.length)await ok(service.storage.from('product-images').remove(photos.map(x=>x.storage_path)));await ok(service.from('products').delete().eq('id',p.id));}
+await ok(service.from('shops').delete().in('owner_id',ids));for(const id of ids)await ok(service.auth.admin.deleteUser(id));console.log('PASS all synthetic UI fixtures removed; no fabricated public inventory or sales remain');

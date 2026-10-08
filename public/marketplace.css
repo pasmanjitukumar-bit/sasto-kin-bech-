@@ -1,0 +1,16 @@
+.market-nav{display:flex;flex-wrap:wrap;gap:18px;border-bottom:1px solid var(--border);padding:18px 0}.market-nav a{color:var(--green);min-height:44px;display:flex;align-items:center}.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;margin-top:25px}.product-card{border:1px solid var(--border);border-radius:15px;overflow:hidden;padding-bottom:20px;background:var(--panel)}.product-card h3,.product-card p,.product-card small{margin:12px 18px;display:block}.product-card img{width:100%;height:220px;object-fit:cover}.product-card del{color:var(--muted);font-size:12px}.image-placeholder{height:220px;display:grid;place-items:center;background:var(--panel2);font-size:60px;color:var(--muted)}.stack-form{display:flex;flex-direction:column;align-items:stretch;max-width:750px;margin:25px auto}.stack-form input[type=checkbox]{width:22px;min-height:22px}.stack-form textarea{width:100%;min-height:120px;border:1px solid var(--border);border-radius:8px;padding:12px;background:var(--panel);color:var(--text);font:inherit}.product-detail{display:grid;grid-template-columns:1fr 1fr;gap:35px}.product-detail img{width:100%;border-radius:14px;margin-bottom:12px}.seller-copy{white-space:pre-wrap}#feedback{color:#a7352b}#photo-previews{display:flex;gap:15px;flex-wrap:wrap}#marketplace article{margin:15px 0}#marketplace>h2{margin-top:20px}@media(max-width:650px){.product-detail{grid-template-columns:1fr}.product-grid{grid-template-columns:repeat(2,1fr)}.product-card img{height:160px}.product-card h3{font-size:15px}.product-card h3,.product-card p,.product-card small{margin:8px 10px}}
+
+.market-active main>section:not(#marketplace){display:none}.market-active #marketplace{min-height:65vh;padding-bottom:50px}
+.market-active #homepage-banners{display:none}
+
+#marketplace details{border:1px solid var(--border);border-radius:14px;margin:16px 0;padding:16px;background:var(--panel)}
+#marketplace summary{cursor:pointer;min-height:44px;font-weight:700;display:flex;align-items:center;gap:10px}
+#marketplace details form{display:flex;flex-direction:column;align-items:stretch;gap:14px;margin:14px 0}
+#marketplace details label{display:flex;align-items:center;gap:12px;min-height:44px;flex-wrap:wrap}
+#marketplace input[type=checkbox]{appearance:auto;width:22px;min-height:22px;height:22px;flex:0 0 22px;accent-color:var(--green)}
+#admin-reason{display:block;width:100%;min-height:100px;margin:10px 0 22px;padding:12px;border:1px solid var(--border);border-radius:10px;background:var(--panel);color:var(--text);font:inherit}
+#marketplace details article{padding:16px;border-bottom:1px solid var(--border);overflow-wrap:anywhere}
+#marketplace details .button{margin:6px 8px 6px 0}
+#remote-audio{display:block;width:min(100%,500px);margin:18px 0}
+
+.payment-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:24px 0}.payment-card{background:#fff;border:1px solid #ddd;border-radius:12px;padding:20px}.payment-card strong{display:block;font-size:18px}.payment-state{display:inline-block;margin-top:12px;padding:6px 10px;border-radius:6px;background:#e4f5ea;color:#15552c;font-size:13px}.payment-state.pending{background:#fff1e4;color:#873900}

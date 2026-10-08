@@ -1,0 +1,4 @@
+import {createClient} from '@supabase/supabase-js';import {randomUUID} from 'node:crypto';import fs from 'node:fs/promises';
+const admin=createClient(process.env.SUPABASE_URL,process.env.SUPABASE_SERVICE_ROLE_KEY,{auth:{persistSession:false}});const suffix=randomUUID(),accounts={};
+for(const role of ['retailer','buyer']){const email=`skb-ui-${role}-${suffix}@example.invalid`,password=randomUUID()+randomUUID();const r=await admin.auth.admin.createUser({email,password,email_confirm:true});if(r.error)throw Error(r.error.message);accounts[role]={id:r.data.user.id,email,password};}
+await fs.writeFile('test-credentials.local.json',JSON.stringify(accounts));await fs.writeFile('tests/photo-fixture.png',Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aD1sAAAAASUVORK5CYII=','base64'));console.log('Synthetic UI accounts ready; credentials stored privately.');
