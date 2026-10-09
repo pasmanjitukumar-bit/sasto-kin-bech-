@@ -1,7 +1,7 @@
 const http=require('node:http'),fs=require('node:fs'),path=require('node:path');
 const root=path.join(__dirname,'public');
 http.createServer(async(req,res)=>{let pathname;try{pathname=decodeURIComponent(new URL(req.url,'http://localhost').pathname)}catch{res.writeHead(400);return res.end();}
-if(['/api/payments','/api/calling'].includes(pathname)){
+if(['/api/payments','/api/calling','/api/auth-status'].includes(pathname)){
  res.status=function(code){this.statusCode=code;return this;};res.json=function(data){this.setHeader('Content-Type','application/json');this.end(JSON.stringify(data));};res.redirect=function(code,url){this.writeHead(code,{Location:url});this.end();};
  req.query=Object.fromEntries(new URL(req.url,'http://localhost').searchParams);
  try{let body='';for await(const chunk of req){body+=chunk;if(body.length>20000){res.status(413).json({error:'REQUEST_TOO_LARGE'});return;}}req.body=body?JSON.parse(body):{};await require('.'+pathname+'.js')(req,res);}catch{if(!res.writableEnded)res.status(400).json({error:'INVALID_REQUEST'});}return;
